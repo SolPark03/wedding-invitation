@@ -25,6 +25,10 @@ import { useState } from "react"
  */
 export const Invitation = () => {
   const contactModalState = useState(false)
+  const hasContactInfo = [...GROOM_INFO, ...BRIDE_INFO].some(
+    ({ phone }) => !!phone,
+  )
+
   return (
     <>
       <LazyDiv className="card invitation">
@@ -65,94 +69,98 @@ export const Invitation = () => {
 
         <div className="break" />
 
-        <Button
-          onClick={() => {
-            contactModalState[1](true)
-          }}
-        >
-          연락하기
-        </Button>
+        {hasContactInfo && (
+          <Button
+            onClick={() => {
+              contactModalState[1](true)
+            }}
+          >
+            연락하기
+          </Button>
+        )}
       </LazyDiv>
 
       {/* 연락처 정보 모달 */}
-      <Modal
-        modalState={contactModalState}
-        className="contact-modal"
-        closeOnClickBackground={true}
-      >
-        <div className="header">
-          <div className="title-group">
-            <div className="title">축하 인사 전하기</div>
-            <div className="subtitle">
-              전화, 문자메세지로 축하 인사를 전해보세요.
+      {hasContactInfo && (
+        <Modal
+          modalState={contactModalState}
+          className="contact-modal"
+          closeOnClickBackground={true}
+        >
+          <div className="header">
+            <div className="title-group">
+              <div className="title">축하 인사 전하기</div>
+              <div className="subtitle">
+                전화, 문자메세지로 축하 인사를 전해보세요.
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="content">
-          {/* 신랑측 연락처 */}
-          <div className="contact-info">
-            {GROOM_INFO.filter(({ phone }) => !!phone).map(
-              ({ relation, name, phone }) => (
-                <Fragment key={relation}>
-                  <div className="relation">{relation}</div>
-                  <div>{name}</div>
-                  <div>
-                    {/* 전화 걸기 */}
-                    <PhoneIcon
-                      className="flip icon"
-                      onClick={() => {
-                        window.open(`tel:${phone}`, "_self")
-                      }}
-                    />
-                    {/* 문자 보내기 */}
-                    <EnvelopeIcon
-                      className="icon"
-                      onClick={() => {
-                        window.open(`sms:${phone}`, "_self")
-                      }}
-                    />
-                  </div>
-                </Fragment>
-              ),
-            )}
+          <div className="content">
+            {/* 신랑측 연락처 */}
+            <div className="contact-info">
+              {GROOM_INFO.filter(({ phone }) => !!phone).map(
+                ({ relation, name, phone }) => (
+                  <Fragment key={relation}>
+                    <div className="relation">{relation}</div>
+                    <div>{name}</div>
+                    <div>
+                      {/* 전화 걸기 */}
+                      <PhoneIcon
+                        className="flip icon"
+                        onClick={() => {
+                          window.open(`tel:${phone}`, "_self")
+                        }}
+                      />
+                      {/* 문자 보내기 */}
+                      <EnvelopeIcon
+                        className="icon"
+                        onClick={() => {
+                          window.open(`sms:${phone}`, "_self")
+                        }}
+                      />
+                    </div>
+                  </Fragment>
+                ),
+              )}
+            </div>
+            {/* 신부측 연락처 */}
+            <div className="contact-info">
+              {BRIDE_INFO.filter(({ phone }) => !!phone).map(
+                ({ relation, name, phone }) => (
+                  <Fragment key={relation}>
+                    <div className="relation">{relation}</div>
+                    <div>{name}</div>
+                    <div>
+                      <PhoneIcon
+                        className="flip icon"
+                        onClick={() => {
+                          window.open(`tel:${phone}`, "_self")
+                        }}
+                      />
+                      <EnvelopeIcon
+                        className="icon"
+                        onClick={() => {
+                          window.open(`sms:${phone}`, "_self")
+                        }}
+                      />
+                    </div>
+                  </Fragment>
+                ),
+              )}
+            </div>
           </div>
-          {/* 신부측 연락처 */}
-          <div className="contact-info">
-            {BRIDE_INFO.filter(({ phone }) => !!phone).map(
-              ({ relation, name, phone }) => (
-                <Fragment key={relation}>
-                  <div className="relation">{relation}</div>
-                  <div>{name}</div>
-                  <div>
-                    <PhoneIcon
-                      className="flip icon"
-                      onClick={() => {
-                        window.open(`tel:${phone}`, "_self")
-                      }}
-                    />
-                    <EnvelopeIcon
-                      className="icon"
-                      onClick={() => {
-                        window.open(`sms:${phone}`, "_self")
-                      }}
-                    />
-                  </div>
-                </Fragment>
-              ),
-            )}
+          <div className="footer">
+            <Button
+              buttonStyle="style2"
+              className="bg-light-grey-color text-dark-color"
+              onClick={() => contactModalState[1](false)}
+            >
+              닫기
+            </Button>
           </div>
-        </div>
-        <div className="footer">
-          <Button
-            buttonStyle="style2"
-            className="bg-light-grey-color text-dark-color"
-            onClick={() => contactModalState[1](false)}
-          >
-            닫기
-          </Button>
-        </div>
-      </Modal>
+        </Modal>
+      )}
     </>
   )
 }

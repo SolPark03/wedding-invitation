@@ -1,7 +1,6 @@
 @use "./component/cover";
 @use "./component/invitation";
 @use "./component/button";
-@use "./component/bgEffect";
 @use "./component/calendar";
 @use "./component/gallery";
 @use "./component/location";
@@ -101,7 +100,7 @@ body {
 }
 
 .background {
-  background-color: var(--theme-bg-color);
+  background-color: var(--white-color);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -171,6 +170,17 @@ body {
             animation-name: inherit !important;
             animation-duration: inherit !important;
           }
+        }
+
+      }
+
+      .cover {
+        @media (max-width: 980px) {
+          margin: 0;
+          padding: 0;
+          border: 0;
+          box-shadow: none;
+          background-color: var(--white-color);
         }
       }
     }

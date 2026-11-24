@@ -37,7 +37,8 @@ export const LOCATION = "웨스턴팰리스웨딩"
 /**
  * 예식 장소 상세 주소
  */
-export const LOCATION_ADDRESS = "인천광역시 부평구 부평대로 278번길 16 웨스턴팰리스웨딩, 7층 웨스턴홀"
+export const LOCATION_ADDRESS =
+  "인천광역시 부평구 부평대로 278번길 16\n웨스턴팰리스웨딩, 7층 웨스턴홀"
 
 /**
  * 카카오톡 공유 시 사용할 위치 정보 주소
@@ -81,20 +82,20 @@ export const BRIDE_INFO = [
   {
     relation: "신부",
     name: BRIDE_FULLNAME,
-    phone: "010-0000-0000",
-    account: "우리은행 0000000000000",
+    phone: "010-4548-8647",
+    account: "신한은행 110370276697",
   },
   {
     relation: "신부 아버지",
     name: BRIDE_FATHER,
-    phone: "010-0000-0000",
-    account: "하나은행 00000000000",
+    phone: "010-4644-8647",
+    account: "광주은행 730107000609",
   },
   {
     relation: "신부 어머니",
     name: BRIDE_MOTHER,
-    phone: "010-0000-0000",
-    account: "하나은행 00000000000000",
+    phone: "010-8643-8647",
+    account: "광주은행 741107511807",
   },
 ]
 
@@ -102,8 +103,8 @@ export const BRIDE_INFO = [
 export const GROOM_FULLNAME = "한기헌"
 export const GROOM_FIRSTNAME = "기헌"
 export const GROOM_TITLE = "장남"
-export const GROOM_FATHER = "남현태"
-export const GROOM_MOTHER = "김현영"
+export const GROOM_FATHER = "한형열"
+export const GROOM_MOTHER = "이영이"
 
 /**
  * 신랑측 연락처 및 계좌 정보
@@ -112,19 +113,19 @@ export const GROOM_INFO = [
   {
     relation: "신랑",
     name: GROOM_FULLNAME,
-    phone: "010-0000-0000",
-    account: "하나은행 00000000000000",
+    phone: "010-9958-1299",
+    account: "농협은행 3129958129901",
   },
   {
     relation: "신랑 아버지",
     name: GROOM_FATHER,
-    phone: "010-0000-0000",
-    account: "신한은행 000000000000",
+    phone: "010-6325-7291",
+    account: "우리은행 72405873602101",
   },
   {
     relation: "신랑 어머니",
     name: GROOM_MOTHER,
-    phone: "010-0000-0000",
-    account: "국민은행 000000000000",
+    phone: "010-6208-3236",
+    account: "국민은행 96140201112674",
   },
 ]

@@ -32,6 +32,10 @@ export const Information1 = () => {
 export const Information2 = () => {
   const donationModalState = useState(false)
   const [isGroom, setIsGroom] = useState(true)
+  const hasGroomAccount = GROOM_INFO.some(({ account }) => !!account)
+  const hasBrideAccount = BRIDE_INFO.some(({ account }) => !!account)
+
+  if (!hasGroomAccount && !hasBrideAccount) return null
 
   return (
     <>
@@ -47,25 +51,29 @@ export const Information2 = () => {
 
         <div className="break" />
 
-        <Button
-          style={{ width: "100%" }}
-          onClick={() => {
-            donationModalState[1](true)
-            setIsGroom(true)
-          }}
-        >
-          신랑측 계좌번호 보기
-        </Button>
-        <div className="break" />
-        <Button
-          style={{ width: "100%" }}
-          onClick={() => {
-            donationModalState[1](true)
-            setIsGroom(false)
-          }}
-        >
-          신부측 계좌번호 보기
-        </Button>
+        {hasGroomAccount && (
+          <Button
+            style={{ width: "100%" }}
+            onClick={() => {
+              donationModalState[1](true)
+              setIsGroom(true)
+            }}
+          >
+            신랑측 계좌번호 보기
+          </Button>
+        )}
+        {hasGroomAccount && hasBrideAccount && <div className="break" />}
+        {hasBrideAccount && (
+          <Button
+            style={{ width: "100%" }}
+            onClick={() => {
+              donationModalState[1](true)
+              setIsGroom(false)
+            }}
+          >
+            신부측 계좌번호 보기
+          </Button>
+        )}
       </div>
 
       {/* 계좌 정보 모달 */}

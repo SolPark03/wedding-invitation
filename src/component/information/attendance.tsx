@@ -1,17 +1,7 @@
-import {
-  BRIDE_FULLNAME,
-  dayjs,
-  GROOM_FULLNAME,
-  LOCATION,
-  WEDDING_DATE,
-  WEDDING_DATE_FORMAT,
-} from "../../const"
+import { dayjs, WEDDING_DATE } from "../../const"
 import { Button } from "../button"
 import { Modal } from "../modal"
-import { useEffect, useRef, useState } from "react"
-import HeartIcon from "../../icons/heart-icon.svg?react"
-import CalendarIcon from "../../icons/calendar-icon.svg?react"
-import MarkerIcon from "../../icons/marker-icon.svg?react"
+import { useState } from "react"
 import { SERVER_URL } from "../../env"
 
 /**
@@ -33,24 +23,12 @@ const RULES = {
  * @returns {JSX.Element | null} 참석 의사 전달 섹션
  */
 export const AttendanceInfo = () => {
-  const attendanceInfoModalState = useState(false)
   const attendanceFormModalState = useState(false)
 
-  const initialized = useRef(false)
-  const now = useRef(dayjs())
-
-  useEffect(() => {
-    if (initialized.current) return
-    initialized.current = true
-
-    // 서버 URL이 없거나 예식일이 지났으면 안내 모달을 띄우지 않음
-    if (!SERVER_URL || WEDDING_DATE.isBefore(now.current)) return
-
-    attendanceInfoModalState[1](true)
-  }, [attendanceInfoModalState])
+  const now = dayjs()
 
   // 서버 연동 기능이 비활성화되어 있거나 이미 예식이 종료된 경우 섹션을 렌더링하지 않음
-  if (!SERVER_URL || WEDDING_DATE.isBefore(now.current)) return null
+  if (!SERVER_URL || WEDDING_DATE.isBefore(now)) return null
 
   return (
     <>
@@ -73,57 +51,6 @@ export const AttendanceInfo = () => {
           참석 의사 전달하기
         </Button>
       </div>
-
-      {/* 참석 안내 모달 */}
-      <Modal
-        className="attendance-info-modal"
-        modalState={attendanceInfoModalState}
-        closeOnClickBackground={true}
-      >
-        <div className="header">
-          <div className="title">참석 의사 전달 안내</div>
-        </div>
-        <div className="content">
-          <div className="info-message">
-            축하의 마음으로 참석해주시는
-            <br />
-            모든 분들을 귀하게 모실 수 있도록
-            <br />
-            참석 및 식사 여부를 미리 여쭙고자 합니다.
-            <div className="break" />
-            부담없이 알려주시면
-            <br />
-            정성껏 준비하겠습니다.
-          </div>
-          <div className="wedding-info">
-            <HeartIcon /> 신랑 {GROOM_FULLNAME} & 신부 {BRIDE_FULLNAME}
-            <br />
-            <CalendarIcon /> {WEDDING_DATE.format(WEDDING_DATE_FORMAT)}
-            <br />
-            <MarkerIcon /> {LOCATION}
-          </div>
-        </div>
-        <div className="footer">
-          <Button
-            buttonStyle="style2"
-            onClick={() => {
-              attendanceInfoModalState[1](false)
-              attendanceFormModalState[1](true)
-            }}
-          >
-            참석 의사 전달하기
-          </Button>
-          <Button
-            buttonStyle="style2"
-            className="bg-light-grey-color text-dark-color"
-            onClick={() => {
-              attendanceInfoModalState[1](false)
-            }}
-          >
-            닫기
-          </Button>
-        </div>
-      </Modal>
 
       {/* 참석 의사 입력 폼 모달 */}
       <Modal

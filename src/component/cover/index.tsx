@@ -2,21 +2,11 @@ import {
   BRIDE_FULLNAME,
   GROOM_FULLNAME,
   LOCATION,
+  LOCATION_ADDRESS,
   WEDDING_DATE,
-  WEDDING_DATE_FORMAT,
 } from "../../const"
 import { COVER_IMAGE } from "../../images"
 import { LazyDiv } from "../lazyDiv"
-
-const DAY_OF_WEEK = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-]
 
 /**
  * 초대장의 메인 커버 섹션입니다.
@@ -27,32 +17,28 @@ const DAY_OF_WEEK = [
 export const Cover = () => {
   return (
     <LazyDiv className="card cover">
-      {/* 상단 날짜 표시 */}
-      <div className="wedding-date">
-        {WEDDING_DATE.format("YYYY")}
-        <div className="divider" />
-        {WEDDING_DATE.format("MM")}
-        <div className="divider" />
-        {WEDDING_DATE.format("DD")}
-      </div>
-      {/* 요일 표시 (영어) */}
-      <div className="wedding-day-of-week">
-        {DAY_OF_WEEK[WEDDING_DATE.day()]}
-      </div>
-      {/* 커버 이미지 */}
       <div className="image-wrapper">
-        <img src={COVER_IMAGE} alt="sample" />
+        <img
+          src={COVER_IMAGE}
+          alt={`${GROOM_FULLNAME}과 ${BRIDE_FULLNAME}의 웨딩 사진`}
+        />
       </div>
-      <div className="subtitle">Save the date for the wedding of</div>
-      {/* 이름 표시 */}
-      <div className="names">
-        {GROOM_FULLNAME}
-        <div className="divider" />
-        {BRIDE_FULLNAME}
+      <div className="cover-info">
+        <div className="names">
+          <span>{GROOM_FULLNAME}</span>
+          <span className="divider" aria-hidden="true" />
+          <span>{BRIDE_FULLNAME}</span>
+        </div>
+        <div className="wedding-details">
+          <div className="info">
+            {WEDDING_DATE.format("YY년 M월 D일")}{" "}
+            {WEDDING_DATE.format("h:mm")}{" "}
+            {WEDDING_DATE.hour() >= 12 ? "PM" : "AM"}
+          </div>
+          <div className="info">{LOCATION}</div>
+          <div className="address">{LOCATION_ADDRESS}</div>
+        </div>
       </div>
-      {/* 예식 정보 (포맷팅된 날짜 및 장소) */}
-      <div className="info">{WEDDING_DATE.format(WEDDING_DATE_FORMAT)}</div>
-      <div className="info">{LOCATION}</div>
     </LazyDiv>
   )
 }
