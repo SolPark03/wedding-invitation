@@ -8,6 +8,7 @@ import UnlockIcon from "../../icons/unlock-icon.svg?react"
 import {
   KMAP_PLACE_ID,
   LOCATION,
+  LOCATION_ADDRESS,
   NMAP_PLACE_ID,
   WEDDING_HALL_POSITION,
 } from "../../const"
@@ -20,7 +21,42 @@ import { NAVER_MAP_CLIENT_ID } from "../../env"
  */
 export const Map = () => {
   // 네이버 지도 클라이언트 ID가 설정되어 있을 때만 지도를 렌더링합니다.
-  return NAVER_MAP_CLIENT_ID ? <NaverMap /> : <div>Map is not available</div>
+  if (NAVER_MAP_CLIENT_ID) return <NaverMap />
+
+  const searchAddress = encodeURIComponent(`${LOCATION} ${LOCATION_ADDRESS}`)
+  return (
+    <>
+      <div className="map-placeholder">지도 정보를 표시하려면 지도를 연결해 주세요.</div>
+      <div className="navigation map-navigation">
+        <a
+          href={`https://map.naver.com/p/search/${searchAddress}`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          네이버지도
+        </a>
+        <a
+          href={`https://map.kakao.com/link/search/${encodeURIComponent(LOCATION)}`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          카카오맵
+        </a>
+        <button
+          onClick={async () => {
+            try {
+              await navigator.clipboard.writeText(LOCATION_ADDRESS)
+              alert("주소를 복사했습니다.")
+            } catch {
+              alert("주소 복사에 실패했습니다.")
+            }
+          }}
+        >
+          주소 복사
+        </button>
+      </div>
+    </>
+  )
 }
 
 /**

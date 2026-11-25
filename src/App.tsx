@@ -6,9 +6,9 @@ import { Calendar } from "./component/calendar"
 import { Gallery } from "./component/gallery"
 import { Information } from "./component/information"
 import { GuestBook } from "./component/guestbook"
-import { LazyDiv } from "./component/lazyDiv"
 import { ShareButton } from "./component/shareButton"
 import { STATIC_ONLY } from "./env"
+import { COVER_IMAGE } from "./images"
 
 /**
  * 메인 애플리케이션 컴포넌트입니다.
@@ -20,36 +20,32 @@ function App() {
   return (
     <div className="background">
       <div className="card-view">
-        <LazyDiv className="card-group">
-          {/* 메인 커버 섹션 */}
-          <Cover />
-
-          {/* 모시는 글 섹션 */}
-          <Invitation />
-        </LazyDiv>
-
-        <LazyDiv className="card-group">
-          {/* 결혼식 날짜 및 달력 섹션 */}
-          <Calendar />
-
-          {/* 사진 갤러리 섹션 */}
-          <Gallery />
-        </LazyDiv>
-
-        <LazyDiv className="card-group">
-          {/* 오시는 길 및 지도 섹션 */}
-          <Location />
-        </LazyDiv>
-
-        <LazyDiv className="card-group">
-          {/* 축의금 및 연락처 정보 섹션 */}
-          <Information />
-          {/* 방명록 섹션 (정적 모드가 아닐 때만 표시) */}
-          {!STATIC_ONLY && <GuestBook />}
-        </LazyDiv>
-
-        {/* 카카오톡/링크 공유 버튼 */}
-        <ShareButton />
+        <Cover />
+        <Invitation />
+        <section className="quote-band">
+          <img src={COVER_IMAGE} alt="" />
+          <div className="quote-copy">
+            <div className="quote-title">
+              Two hearts,
+              <br />
+              one horizon
+            </div>
+            <p>같은 노을을 바라보며 함께 걸어갑니다.</p>
+          </div>
+        </section>
+        <Calendar />
+        <Gallery />
+        <Location />
+        <Information />
+        {!STATIC_ONLY && <GuestBook />}
+        <section className="closing-section">
+          <img src={COVER_IMAGE} alt="" />
+          <div className="closing-copy">
+            <div className="eyebrow">Thank you</div>
+            <p>저희의 새로운 시작을 함께 축복해 주셔서 감사합니다.</p>
+            <ShareButton />
+          </div>
+        </section>
       </div>
     </div>
   )

@@ -4,7 +4,6 @@ import {
   GROOM_FIRSTNAME,
   HOLIDAYS,
   WEDDING_DATE,
-  WEDDING_DATE_FORMAT,
 } from "../../const"
 import { LazyDiv } from "../lazyDiv"
 
@@ -55,33 +54,34 @@ export const Calendar = () => {
 
   return (
     <LazyDiv className="card calendar">
-      <h2 className="english">The Wedding Day</h2>
-      <div className="break" />
+      <h2 className="english">Wedding Day</h2>
       {/* 예식 일시 표시 */}
-      {WEDDING_DATE.format(WEDDING_DATE_FORMAT)}
+      <div className="section-subtitle">
+        {WEDDING_DATE.format("YYYY년 M월 D일 dddd A h시 mm분")}
+      </div>
 
       {/* 달력 영역 */}
       <div className="calendar-wrapper">
         <div className="head holiday">
-          <span>Su</span>
+          <span>S</span>
         </div>
         <div className="head">
-          <span>Mo</span>
+          <span>M</span>
         </div>
         <div className="head">
-          <span>Tu</span>
+          <span>T</span>
         </div>
         <div className="head">
-          <span>We</span>
+          <span>W</span>
         </div>
         <div className="head">
-          <span>Th</span>
+          <span>T</span>
         </div>
         <div className="head">
-          <span>Fr</span>
+          <span>F</span>
         </div>
         <div className="head">
-          <span>Sa</span>
+          <span>S</span>
         </div>
 
         {/* 첫 주 빈 공간 채우기 */}
@@ -122,23 +122,25 @@ export const Calendar = () => {
       {/* 카운트다운 영역 */}
       <div className="countdown-wrapper">
         <div className="countdown">
-          <div className="unit">DAY</div>
-          <div />
-          <div className="unit">HOUR</div>
-          <div />
-          <div className="unit">MIN</div>
-          <div />
-          <div className="unit">SEC</div>
-          <div className="count">{diffs.days}</div>
-          <span>:</span>
-          <div className="count">{diffs.hours}</div>
-          <span>:</span>
-          <div className="count">{diffs.minutes}</div>
-          <span>:</span>
-          <div className="count">{diffs.seconds}</div>
+          <div className="count-block">
+            <div className="count">{diffs.days}</div>
+            <div className="unit">DAYS</div>
+          </div>
+          <div className="count-block">
+            <div className="count">{diffs.hours}</div>
+            <div className="unit">HOUR</div>
+          </div>
+          <div className="count-block">
+            <div className="count">{diffs.minutes}</div>
+            <div className="unit">MIN</div>
+          </div>
+          <div className="count-block">
+            <div className="count">{diffs.seconds}</div>
+            <div className="unit">SEC</div>
+          </div>
         </div>
         <div className="message">
-          {GROOM_FIRSTNAME} & {BRIDE_FIRSTNAME}의 결혼식이{" "}
+          {GROOM_FIRSTNAME} ♥ {BRIDE_FIRSTNAME}의 결혼식이{" "}
           {dayDiff > 0 ? (
             <>
               <span className="d-day">{dayDiff}</span>일 남았습니다.

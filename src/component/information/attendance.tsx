@@ -1,8 +1,9 @@
 import { dayjs, WEDDING_DATE } from "../../const"
 import { Button } from "../button"
 import { Modal } from "../modal"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { SERVER_URL } from "../../env"
+import { LazyDiv } from "../lazyDiv"
 
 /**
  * 입력 데이터 제한 규칙
@@ -32,25 +33,29 @@ export const AttendanceInfo = () => {
 
   return (
     <>
-      <div className="info-card">
-        <div className="label">참석 의사 전달</div>
-        <div className="content">
-          신랑, 신부에게 참석의사를
-          <br />
-          미리 전달할 수 있어요.
+      <LazyDiv className="card rsvp-section">
+        <h2 className="english">R.S.V.P.</h2>
+        <div className="section-subtitle">참석 의사 전달</div>
+        <div className="info-card">
+          <div className="content">
+            신랑, 신부에게 참석의사를
+            <br />
+            미리 전달할 수 있어요.
+          </div>
+
+          <div className="break" />
+
+          <Button
+            buttonStyle="style2"
+            style={{ width: "100%" }}
+            onClick={() => {
+              attendanceFormModalState[1](true)
+            }}
+          >
+            참석 의사 전달하기
+          </Button>
         </div>
-
-        <div className="break" />
-
-        <Button
-          style={{ width: "100%" }}
-          onClick={() => {
-            attendanceFormModalState[1](true)
-          }}
-        >
-          참석 의사 전달하기
-        </Button>
-      </div>
+      </LazyDiv>
 
       {/* 참석 의사 입력 폼 모달 */}
       <Modal

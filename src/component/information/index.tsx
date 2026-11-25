@@ -13,13 +13,16 @@ export const Information1 = () => {
   return (
     <>
       <h2 className="english">Information</h2>
+      <div className="section-subtitle">안내사항</div>
       <div className="info-card">
-        <div className="label">식사 안내</div>
+        <div className="label">식사 시간</div>
         <div className="content">
           식사시간: 12시 30분 ~ 14시 30분
-          <br />
-          장소: 지하 1층 연회장
         </div>
+      </div>
+      <div className="info-card">
+        <div className="label">식사 장소</div>
+        <div className="content">지하 1층 연회장</div>
       </div>
     </>
   )
@@ -39,42 +42,45 @@ export const Information2 = () => {
 
   return (
     <>
-      <div className="info-card">
-        <div className="label">마음 전하기</div>
-        <div className="content">
-          참석이 어려워 직접 축하해주지 못하는
-          <br />
-          분들을 위해 계좌번호를 기재하였습니다.
-          <br />
-          넓은 마음으로 양해 부탁드립니다.
+      <LazyDiv className="card with-heart">
+        <h2 className="english">With Heart</h2>
+        <div className="section-subtitle">마음 전하실 곳</div>
+        <div className="info-card">
+          <div className="content">
+            참석이 어려워 직접 축하해주지 못하는
+            <br />
+            분들을 위해 계좌번호를 기재하였습니다.
+            <br />
+            넓은 마음으로 양해 부탁드립니다.
+          </div>
+
+          <div className="break" />
+
+          {hasGroomAccount && (
+            <Button
+              style={{ width: "100%" }}
+              onClick={() => {
+                donationModalState[1](true)
+                setIsGroom(true)
+              }}
+            >
+              신랑측 계좌번호 보기
+            </Button>
+          )}
+          {hasGroomAccount && hasBrideAccount && <div className="break" />}
+          {hasBrideAccount && (
+            <Button
+              style={{ width: "100%" }}
+              onClick={() => {
+                donationModalState[1](true)
+                setIsGroom(false)
+              }}
+            >
+              신부측 계좌번호 보기
+            </Button>
+          )}
         </div>
-
-        <div className="break" />
-
-        {hasGroomAccount && (
-          <Button
-            style={{ width: "100%" }}
-            onClick={() => {
-              donationModalState[1](true)
-              setIsGroom(true)
-            }}
-          >
-            신랑측 계좌번호 보기
-          </Button>
-        )}
-        {hasGroomAccount && hasBrideAccount && <div className="break" />}
-        {hasBrideAccount && (
-          <Button
-            style={{ width: "100%" }}
-            onClick={() => {
-              donationModalState[1](true)
-              setIsGroom(false)
-            }}
-          >
-            신부측 계좌번호 보기
-          </Button>
-        )}
-      </div>
+      </LazyDiv>
 
       {/* 계좌 정보 모달 */}
       <Modal
@@ -137,25 +143,13 @@ export const Information2 = () => {
  * @returns {JSX.Element} 정보 안내 섹션
  */
 export const Information = () => {
-  // 정적 모드일 경우 참석 의사 전달 기능을 제외합니다.
-  if (STATIC_ONLY) {
-    return (
-      <>
-        <LazyDiv className="card information">
-          <Information1 />
-        </LazyDiv>
-        <LazyDiv className="card information">
-          <Information2 />
-        </LazyDiv>
-      </>
-    )
-  }
-
   return (
-    <LazyDiv className="card information">
-      <Information1 />
+    <>
+      <LazyDiv className="card information">
+        <Information1 />
+      </LazyDiv>
+      {!STATIC_ONLY && <AttendanceInfo />}
       <Information2 />
-      <AttendanceInfo />
-    </LazyDiv>
+    </>
   )
 }

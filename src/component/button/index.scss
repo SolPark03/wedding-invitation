@@ -7,9 +7,9 @@ button.button {
 
   &.button-style-1 {
     background-color: var(--white-color);
-    border: solid 0.05rem var(--alt-color);
+    border: solid 1px var(--dark-grey-color);
     color: var(--alt-color);
-    border-radius: 0.3rem;
+    border-radius: 999px;
     padding: 0.5rem 1rem;
   }
 
@@ -17,6 +17,7 @@ button.button {
     background-color: var(--alt-color);
     color: var(--white-color);
     border: none;
+    border-radius: 999px;
     padding: 0.5rem 1rem;
   }
 }

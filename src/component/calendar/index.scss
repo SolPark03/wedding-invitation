@@ -1,19 +1,24 @@
 .calendar {
   .calendar-wrapper {
     display: grid;
+    width: 100%;
     grid-template-columns: repeat(7, 1fr);
-    margin: 1rem;
-    border: 1px solid var(--light-grey-color);
+    max-width: 17.3rem;
+    margin: 0 auto 5.5rem;
 
     > div {
       aspect-ratio: 1;
       display: flex;
       justify-content: center;
       align-items: center;
+      font-size: 0.875rem;
 
       &.head {
         aspect-ratio: auto;
-        background-color: var(--light-grey-color);
+        padding-bottom: 0.2rem;
+        color: #a99887;
+        font-family: "Garamond", Georgia, serif;
+        font-size: 0.75rem;
       }
 
       &.holiday {
@@ -32,30 +37,20 @@
         > div.heart {
           width: 50%;
           height: 50%;
-          background: var(--theme-bg-color);
-          top: 35%;
-          left: 25%;
           position: absolute;
-          transform: rotate(45deg);
+          top: 25%;
+          left: 25%;
+          border-radius: 50%;
+          background: #d7ad91;
+          transform: none;
           z-index: 0;
+
           &::before {
-            content: "";
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: -50%;
-            left: 0%;
-            border-radius: 50%;
-            background: var(--theme-bg-color);
+            display: none;
           }
+
           &::after {
-            content: "";
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            left: -50%;
-            border-radius: 50%;
-            background: var(--theme-bg-color);
+            display: none;
           }
         }
       }
@@ -69,30 +64,46 @@
 
     .countdown {
       display: grid;
-      width: 15rem;
-      grid-template-columns: 1fr 1rem 1fr 1rem 1fr 1rem 1fr;
+      width: 100%;
+      grid-template-columns: repeat(4, 1fr);
       align-items: center;
-      * {
-        margin: 0 0.1rem;
+
+      .count-block {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
       }
+
       .count {
-        opacity: 0.8;
-        font-weight: bold;
-        font-size: 1.2rem;
+        color: var(--dark-color);
+        font-size: 1.35rem;
+        font-variant-numeric: tabular-nums;
+        line-height: 1.4;
       }
+
       .unit {
-        font-weight: bold;
-        font-size: 0.6rem;
-        opacity: 0.5;
+        color: #9c8873;
+        font-family: "Garamond", Georgia, serif;
+        font-size: 0.65rem;
+        letter-spacing: 0.08em;
+        line-height: 1.5;
       }
     }
 
     .message {
-      margin-top: 2rem;
-      margin-bottom: 1.5rem;
+      margin: 1.25rem 0 0;
+      color: #8b7664;
+      font-size: 0.875rem;
+      line-height: 1.4;
+
       .d-day {
         color: var(--theme-color);
       }
     }
+  }
+
+  > .section-subtitle {
+    margin-bottom: 0.6rem;
+    line-height: 1.43;
   }
 }

@@ -23,6 +23,19 @@ export const ShareButton = () => {
   return (
     <LazyDiv className="footer share-button">
       <button
+        className="copy-link"
+        onClick={async () => {
+          try {
+            await navigator.clipboard.writeText(window.location.href)
+            alert("초대장 링크를 복사했습니다.")
+          } catch {
+            alert("링크 복사에 실패했습니다.")
+          }
+        }}
+      >
+        링크 복사
+      </button>
+      <button
         className="ktalk-share"
         onClick={() => {
           // 카카오 SDK 로드 전이면 무시
@@ -44,7 +57,7 @@ export const ShareButton = () => {
                 "//" +
                 window.location.host +
                 baseUrl +
-                "/preview_image.png",
+                "images/preview_image.png",
               link: {
                 mobileWebUrl:
                   window.location.protocol +
