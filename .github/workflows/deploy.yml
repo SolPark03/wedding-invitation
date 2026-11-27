@@ -21,9 +21,11 @@ jobs:
       - name: Prepare static site
         run: |
           mkdir -p _site
+          mkdir -p _site/src/images
           cp main.html _site/index.html
           cp common.css common.js _site/
           cp -R public _site/public
+          cp src/images/band-background.jpg _site/src/images/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

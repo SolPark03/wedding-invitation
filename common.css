@@ -75,7 +75,7 @@ section{padding:96px 30px;text-align:center;position:relative}
 /* 팝업 */
 .modal{position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .35s}
 .modal.open{opacity:1;pointer-events:auto}
-.m-box{width:100%;max-width:430px;background:var(--bg);border-radius:24px 24px 0 0;padding:34px 26px 30px;transform:translateY(100%);transition:transform .45s cubic-bezier(.2,.8,.2,1);text-align:center;position:relative}
+.m-box{width:100%;max-width:430px;max-height:90vh;overflow-y:auto;background:var(--bg);border-radius:24px 24px 0 0;padding:34px 26px 30px;transform:translateY(100%);transition:transform .45s cubic-bezier(.2,.8,.2,1);text-align:center;position:relative}
 .modal.open .m-box{transform:none}
 .m-x{position:absolute;top:16px;right:18px;font-size:18px;opacity:.6}
 .m-box h4{font-size:18px;font-weight:500;margin-bottom:8px}
